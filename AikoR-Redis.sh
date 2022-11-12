@@ -40,7 +40,6 @@ show_menu() {
 ————————————————
  "
     echo && read -p "Please enter an option [0-3]: " num
-
     case "${num}" in
         0) exit 0
         ;;
