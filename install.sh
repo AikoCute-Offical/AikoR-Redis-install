@@ -108,8 +108,8 @@ function config_redis() {
     if [[ ${redis_maxmemory} == [Yy] ]]; then
         echo -e "Input the maxmemory of Redis [default: 512MB]:"
         read -p "(Default maxmemory: 512MB):" redis_maxmemory
-        [[ -z "${redis_maxmemory}" ]] && redis_maxmemory="512MB"
-        echo "maxmemory ${redis_maxmemory}" >> /etc/redis.conf
+        [[ -z "${redis_maxmemory}" ]] && redis_maxmemory="512"
+        echo "maxmemory ${redis_maxmemory}MB" >> /etc/redis.conf
     fi 
 }
 
