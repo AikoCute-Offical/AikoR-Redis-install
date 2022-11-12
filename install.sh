@@ -94,9 +94,9 @@ function config_redis() {
     [[ -z "${redis_port}" ]] && redis_port="6379"
     echo "port ${redis_port}" >> /etc/redis.conf
 
-    echo -e "Input the password of Redis [default: none]:"
-    read -p "(Default password: none):" redis_password
-    [[ -z "${redis_password}" ]] && redis_password=""
+    echo -e "Input the password of Redis [default: 123456]:"
+    read -p "(Default password: 123456):" redis_password
+    [[ -z "${redis_password}" ]] && redis_password="123456"
     if [[ -n "${redis_password}" ]]; then
         echo "requirepass ${redis_password}" >> /etc/redis.conf
     fi
@@ -120,6 +120,6 @@ install_redis
 config_redis
 
 # start Redis
-start_redisS
+start_redis
 
 echo -e "${green}Redis install completed!${plain}"
