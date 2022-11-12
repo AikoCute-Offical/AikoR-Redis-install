@@ -100,17 +100,6 @@ function config_redis() {
     if [[ -n "${redis_password}" ]]; then
         echo "requirepass ${redis_password}" >> /etc/redis.conf
     fi
-
-    
-    echo -e "Do you want to enable Redis maxmemory? [y/n]"
-    read -p "(Default: n):" redis_maxmemory
-    [[ -z "${redis_maxmemory}" ]] && redis_maxmemory="n"
-    if [[ ${redis_maxmemory} == [Yy] ]]; then
-        echo -e "Input the maxmemory of Redis [default: 512MB]:"
-        read -p "(Default maxmemory: 512MB):" redis_maxmemory
-        [[ -z "${redis_maxmemory}" ]] && redis_maxmemory="512"
-        echo "maxmemory ${redis_maxmemory}MB" >> /etc/redis.conf
-    fi 
 }
 
 # start Redis
