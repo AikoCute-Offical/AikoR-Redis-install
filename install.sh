@@ -76,40 +76,56 @@ fi
 # install Redis
 function install_redis() {
     if [[ x"${release}" == x"centos" ]]; then
-        yum install -y epel-release
+        yum install epel-release -y
         yum install -y redis
     else
         apt-get update
-        apt-get install -y redis-server
+        add-apt-repository ppa:redislabs/redis
+        apt-get install redis
     fi
 }
 
-# config Redis
+# config redis
 function config_redis() {
-    echo "" > /etc/redis.conf
-    echo "bind 0.0.0.0" >> /etc/redis.conf
+    if [[ x"${release}" == x"centos" ]]; then
+        echo "" > /etc/redis.conf
+        echo "bind 0.0.0.0" >> /etc/redis.conf
 
-    echo -e "Input the port of Redis [default: 6379]:"
-    read -p "(Default port: 6379):" redis_port
-    [[ -z "${redis_port}" ]] && redis_port="6379"
-    echo "port ${redis_port}" >> /etc/redis.conf
+        read -p "Input port for Redis (Default:6379) :" redis_port
+        [ -z "${redis_port}" ] && redis_port="6379"
+        echo -e "Port Redis：${redis_port}"
+        echo "port ${redis_port}" >> /etc/redis.conf
 
-    echo -e "Input the password of Redis [default: 123456]:"
-    read -p "(Default password: 123456):" redis_password
-    [[ -z "${redis_password}" ]] && redis_password="123456"
-    if [[ -n "${redis_password}" ]]; then
+        read -p "Pass Redis (Default: AIKO):" redis_password
+        [ -z "${redis_password}" ] && redis_password="AIKO"
+        echo -e "Password Redis：${redis_password}"
         echo "requirepass ${redis_password}" >> /etc/redis.conf
     fi
+
+    if [[ x"${release}" == x"debian" || x"${release}" == x"ubuntu" ]]; then
+        echo "" > /etc/redis/redis.conf
+        echo "bind 0.0.0.0" >> /etc/redis/redis.conf
+
+        read -p "Input port for Redis (Default:6379) :" redis_port
+        [ -z "${redis_port}" ] && redis_port="6379"
+        echo -e "Port Redis：${redis_port}"
+        echo "port ${redis_port}" >> /etc/redis/redis.conf
+
+        read -p "Pass Redis (Default: AIKO):" redis_password
+        [ -z "${redis_password}" ] && redis_password="AIKO"
+        echo -e "Password Redis：${redis_password}"
+        echo "requirepass ${redis_password}" >> /etc/redis/redis.conf
+    fi
 }
 
-# start Redis
+# start redis
 function start_redis() {
     if [[ x"${release}" == x"centos" ]]; then
         systemctl start redis
         systemctl enable redis
     else
         systemctl start redis-server
-        systemctl enable redis-server
+        systemctl enable --now redis-server
     fi
 }
 
