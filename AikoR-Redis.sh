@@ -19,12 +19,12 @@ english(){
 
 # install Chinese
 chinese(){
-    bash <(curl -Ls https://raw.githubusercontent.com/AikoCute-Offical/AikoR-Redis-install/vi/install.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/AikoCute-Offical/AikoR-Redis-install/zh/install.sh)
 }
 
 # install vietnamese
 vietnamese(){
-    bash <(curl -Ls https://raw.githubusercontent.com/AikoCute-Offical/AikoR-Redis-install/zh/install.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/AikoCute-Offical/AikoR-Redis-install/vi/install.sh)
 }   
 
 
