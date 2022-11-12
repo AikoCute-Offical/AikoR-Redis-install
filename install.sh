@@ -103,12 +103,16 @@ function config_redis() {
         echo "requirepass ${redis_password}" >> /etc/redis.conf
     fi
 
-    echo -e "Vui lòng nhập bộ nhớ tối đa của Redis (mặc định: 512M):"
-    read -p "(Mặc định bộ nhớ tối đa: 512M):" redis_maxmemory
-    [ -z "${redis_maxmemory}" ] && redis_maxmemory="512M"
-    echo -e "Bộ nhớ tối đa của Redis：${redis_maxmemory}"
-    echo "maxmemory ${redis_maxmemory}" >> /etc/redis.conf
-    
+    echo -e "Bạn có muốn thiết lập maxmemory cho Redis không? (mặc định: không):"
+    read -p "(Mặc định: không):" redis_maxmemory
+    [ -z "${redis_maxmemory}" ] && redis_maxmemory="n"
+    if [[ ${redis_maxmemory} == [Yy] ]]; then
+        echo -e "Vui lòng nhập maxmemory của Redis (mặc định: 512M):"
+        read -p "(Mặc định maxmemory: 512M):" redis_maxmemory
+        [ -z "${redis_maxmemory}" ] && redis_maxmemory="512M"
+        echo -e "Maxmemory của Redis：${redis_maxmemory}"
+        echo "maxmemory ${redis_maxmemory}" >> /etc/redis.conf
+    fi
 }
 
 # start redis
