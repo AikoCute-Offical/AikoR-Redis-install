@@ -32,7 +32,7 @@ show_menu() {
     echo -e "
   ${green}AikoR Backend Management Scripts，${plain}${red}does not work with docker${plain}
 --- https://github.com/AikoCute-Offical/AikoR ---
-  ${green}0.${plain} Exit Install AikoR
+  ${green}0.${plain} Exit Install AikoR-Redis
 ————————————————
   ${green}1.${plain} English
   ${green}2.${plain} Chinese
