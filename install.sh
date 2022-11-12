@@ -80,7 +80,8 @@ function install_redis() {
         yum install -y redis
     else
         apt-get update
-        apt-get install -y redis-server
+        add-apt-repository ppa:redislabs/redis
+        apt-get install redis
     fi
 }
 
@@ -126,7 +127,7 @@ function start_redis() {
         systemctl enable redis
     else
         systemctl start redis-server
-        systemctl enable redis-server
+        systemctl enable --now redis-server
     fi
 }
 
