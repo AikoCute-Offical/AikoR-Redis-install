@@ -100,17 +100,6 @@ function config_redis() {
     [[ -z "${redis_password}" ]] && redis_password="123456"
     echo -e "Redis的密码: ${redis_password}\n"
     echo "requirepass ${redis_password}" >> /etc/redis.conf
-
-    echo -e "您要为Redis设置MaxMemory吗？(默认：否）"
-    read -p "(默认: 否, 请输入[Y/n]):" redis_maxmemory
-    [[ -z "${redis_maxmemory}" ]] && redis_maxmemory="n"
-    if [[ ${redis_maxmemory} == [Yy] ]]; then
-        echo -e "请输入Redis的MaxMemory(单位：MB):"
-        read -p "(默认MaxMemory: 512):" redis_maxmemory
-        [[ -z "${redis_maxmemory}" ]] && redis_maxmemory="512"
-        echo -e "Redis的MaxMemory: ${redis_maxmemory}\n"
-        echo "maxmemory ${redis_maxmemory}MB" >> /etc/redis.conf
-    fi
 }
 
 # start redis
